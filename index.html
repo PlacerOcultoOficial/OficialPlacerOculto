@@ -3,135 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comunidad VIP | Portal Directo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Acceso Exclusivo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --bg-main: #05050a;
-            --accent-red: #ff0055;
-            --accent-purple: #7928ca;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --text: #f1f5f9;
-            --font-title: 'Orbitron', sans-serif;
-            --font-body: 'Plus Jakarta Sans', sans-serif;
-        }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--bg-main); color: var(--text); font-family: var(--font-body); min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; }
+        body { background-color: #0b0b0b; color: #e5e5e5; font-family: 'Inter', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
         
-        .bg-glow { position: fixed; width: 300px; height: 300px; border-radius: 50%; filter: blur(120px); z-index: -1; pointer-events: none; }
-        .glow-1 { top: -50px; left: -50px; background: var(--accent-red); opacity: 0.3; }
-        .glow-2 { bottom: -50px; right: -50px; background: var(--accent-purple); opacity: 0.3; }
+        .profile-container { width: 100%; max-width: 480px; background: #121212; border: 1px solid #222; border-radius: 24px; padding: 40px 25px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
+        .avatar { width: 90px; height: 90px; border-radius: 50%; border: 2px solid #d4af37; padding: 3px; margin: 0 auto 15px; }
+        .avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 25px 8%; border-bottom: 1px solid var(--glass-border); backdrop-filter: blur(10px); }
-        .logo-box { display: flex; align-items: center; gap: 12px; }
-        .logo-box img { width: 42px; height: 42px; border-radius: 12px; border: 1px solid var(--accent-red); }
-        .logo-text { font-family: var(--font-title); font-size: 1.1rem; font-weight: 900; background: linear-gradient(90deg, #fff, var(--accent-red)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .profile-name { font-family: 'Cinzel', serif; font-size: 1.4rem; color: #d4af37; letter-spacing: 2px; margin-bottom: 5px; }
+        .profile-bio { font-size: 0.8rem; color: #888; margin-bottom: 30px; font-weight: 300; }
 
-        .main-container { max-width: 1100px; margin: 40px auto; padding: 0 20px; width: 100%; }
-        .hero-banner { text-align: center; margin-bottom: 50px; }
-        .hero-title { font-family: var(--font-title); font-size: 2.8rem; letter-spacing: 1px; margin-bottom: 15px; }
-        .hero-title span { color: var(--accent-red); text-shadow: 0 0 20px rgba(255,0,85,0.6); }
-        .hero-desc { color: #94a3b8; max-width: 550px; margin: 0 auto; font-size: 0.95rem; }
+        .links-wrapper { display: flex; flex-direction: column; gap: 12px; }
+        .custom-link { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px; color: #fff; text-decoration: none; transition: 0.2s ease; }
+        .custom-link:hover { border-color: #d4af37; background: #222; transform: scale(1.02); }
+        .link-left { display: flex; align-items: center; gap: 12px; }
+        .link-left i { font-size: 1.1rem; color: #d4af37; }
+        .link-text { font-size: 0.85rem; font-weight: 500; }
 
-        .search-box { position: relative; max-width: 500px; margin: 30px auto; }
-        .search-box input { width: 100%; padding: 16px 20px 16px 50px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 50px; color: #fff; font-size: 0.9rem; outline: none; transition: 0.3s; }
-        .search-box input:focus { border-color: var(--accent-red); box-shadow: 0 0 15px rgba(255,0,85,0.2); }
-        .search-box i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: #64748b; }
-
-        .grid-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .card-link { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 24px; backdrop-filter: blur(8px); transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
-        .card-link:hover { transform: translateY(-5px); border-color: var(--accent-red); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .card-icon { width: 45px; height: 45px; background: rgba(255,255,255,0.05); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--accent-red); }
-        .card-title { font-weight: 700; font-size: 1rem; }
-        .card-tag { font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
-
-        .btn-action { display: block; width: 100%; padding: 12px; text-align: center; background: linear-gradient(90deg, var(--accent-red), var(--accent-purple)); color: #fff; font-weight: 700; text-decoration: none; border-radius: 10px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.3s; margin-top: 15px; }
-        .btn-action:hover { opacity: 0.9; box-shadow: 0 0 15px rgba(255,0,85,0.4); }
-
-        footer { text-align: center; padding: 30px; border-top: 1px solid var(--glass-border); font-size: 0.8rem; color: #64748b; }
+        .footer-note { margin-top: 35px; font-size: 0.7rem; color: #444; }
     </style>
 </head>
 <body>
-    <div class="bg-glow glow-1"></div>
-    <div class="bg-glow glow-2"></div>
-
-    <nav class="navbar">
-        <div class="logo-box">
-            <img src="logo.png" alt="Logo">
-            <span class="logo-text">RED VIP</span>
+    <div class="profile-container">
+        <div class="avatar">
+            <img src="logo.png" alt="Perfil">
         </div>
-    </nav>
+        <h1 class="profile-name">ACCESO PRIVADO</h1>
+        <p class="profile-bio">Directorio oficial de plataformas y vías de soporte.</p>
 
-    <main class="main-container">
-        <section class="hero-banner">
-            <h1 class="hero-title">ENLACES <span>OFICIALES</span></h1>
-            <p class="hero-desc">Accede directamente a todos los canales autorizados y comunidades activas en tiempo real.</p>
-            
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" id="filterInput" placeholder="Filtrar plataformas..." onkeyup="filterCards()">
-            </div>
-        </section>
+        <div class="links-wrapper">
+            <a href="https://t.me/PLACERARDIENTE" target="_blank" class="custom-link">
+                <div class="link-left"><i class="fab fa-telegram"></i><span class="link-text">Comunidad Telegram</span></div>
+                <i class="fas fa-arrow-right" style="font-size:0.7rem; color:#555;"></i>
+            </a>
 
-        <section class="grid-links" id="linksGrid">
-            <div class="card-link">
-                <div>
-                    <div class="card-header">
-                        <div class="card-icon"><i class="fab fa-telegram-plane"></i></div>
-                        <div>
-                            <div class="card-title">Canal Principal</div>
-                            <div class="card-tag">Telegram</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="https://t.me/PLACERARDIENTE" target="_blank" class="btn-action">Entrar al Canal</a>
-            </div>
+            <a href="https://www.instagram.com/placerardiente" target="_blank" class="custom-link">
+                <div class="link-left"><i class="fab fa-instagram"></i><span class="link-text">Canal Instagram</span></div>
+                <i class="fas fa-arrow-right" style="font-size:0.7rem; color:#555;"></i>
+            </a>
 
-            <div class="card-link">
-                <div>
-                    <div class="card-header">
-                        <div class="card-icon"><i class="fab fa-instagram"></i></div>
-                        <div>
-                            <div class="card-title">Cuenta Oficial</div>
-                            <div class="card-tag">Instagram</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="https://www.instagram.com/placerardiente" target="_blank" class="btn-action">Seguir</a>
-            </div>
+            <a href="https://t.me/PLACEROCULTO21" target="_blank" class="custom-link">
+                <div class="link-left"><i class="fas fa-paper-plane"></i><span class="link-text">Atención Directa</span></div>
+                <i class="fas fa-arrow-right" style="font-size:0.7rem; color:#555;"></i>
+            </a>
+        </div>
 
-            <div class="card-link">
-                <div>
-                    <div class="card-header">
-                        <div class="card-icon"><i class="fas fa-headset"></i></div>
-                        <div>
-                            <div class="card-title">Soporte y Consultas</div>
-                            <div class="card-tag">Contacto Directo</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="https://t.me/PLACEROCULTO21" target="_blank" class="btn-action">Escribir</a>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        &copy; 2026 Directorio Independiente. Todos los derechos reservados.
-    </footer>
-
-    <script>
-        function filterCards() {
-            let input = document.getElementById('filterInput').value.toLowerCase();
-            let cards = document.getElementsByClassName('card-link');
-            Array.from(cards).forEach(card => {
-                let title = card.querySelector('.card-title').innerText.toLowerCase();
-                card.style.display = title.includes(input) ? 'flex' : 'none';
-            });
-        }
-    </script>
+        <div class="footer-note">Portal Verificado &copy; 2026</div>
+    </div>
 </body>
 </html>
