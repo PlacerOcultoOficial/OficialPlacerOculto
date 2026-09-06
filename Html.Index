@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLACER ARDIENTE | Portal Oficial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-principal: #080304;
+            --bg-tarjeta: #14090c;
+            --bg-tarjeta-hover: #1f0f14;
+            --primario: #ff1a1a;
+            --primario-hover: #ff4d4d;
+            --dorado: #e6b800;
+            --dorado-hover: #ffd700;
+            --secundario: #0088cc;
+            --exito: #00e676;
+            --texto-blanco: #ffffff;
+            --texto-mutado: #b3a0a5;
+            --borde: rgba(255, 26, 26, 0.25);
+            --borde-hover: rgba(230, 184, 0, 0.5);
+            --fuente: 'Montserrat', sans-serif;
+            --transicion: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body {
+            font-family: var(--fuente); background-color: var(--bg-principal); color: var(--texto-blanco);
+            line-height: 1.6; overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 20%, rgba(255, 26, 26, 0.12) 0%, transparent 60%);
+        }
+
+        .contenedor { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* BOTONES GENÉRICOS */
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 20px; border-radius: 8px; font-weight: 700; text-decoration: none; text-transform: uppercase; font-size: 0.78rem; letter-spacing: 0.3px; transition: var(--transicion); cursor: pointer; border: none; }
+        .btn-primario { background: linear-gradient(135deg, var(--primario) 0%, #990000 100%); color: var(--texto-blanco); box-shadow: 0 4px 15px rgba(255, 26, 26, 0.3); }
+        .btn-primario:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 26, 26, 0.5); }
+        .btn-dorado { background: linear-gradient(135deg, var(--dorado) 0%, #997a00 100%); color: #000000; box-shadow: 0 4px 15px rgba(230, 184, 0, 0.3); font-weight: 900; }
+        .btn-dorado:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(230, 184, 0, 0.5); color: #000000; }
+        .btn-outline { background: transparent; color: var(--texto-blanco); border: 2px solid rgba(255,255,255,0.15); }
+        .btn-outline:hover { background: rgba(255,255,255,0.05); transform: translateY(-2px); border-color: var(--dorado); }
+        .btn-secundario { background: linear-gradient(135deg, var(--secundario) 0%, #006699 100%); color: var(--texto-blanco); }
+
+        /* HEADER */
+        header { background-color: rgba(8, 3, 4, 0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 26, 26, 0.15); position: sticky; top: 0; z-index: 100; padding: 14px 0; }
+        header .contenedor { display: flex; align-items: center; justify-content: space-between; }
+        .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--texto-blanco); }
+        .brand-logo { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--dorado); object-fit: cover; }
+        .brand-nombre { font-weight: 900; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .brand-nombre span { color: var(--primario); }
+        
+        .header-acciones { display: flex; align-items: center; gap: 10px; }
+        .btn-acceso-nav { padding: 8px 16px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: var(--transicion); }
+        .btn-login-nav { color: var(--texto-blanco); background: rgba(255,255,255,0.05); border: 1px solid rgba(255, 255, 255, 0.15); }
+        .btn-login-nav:hover { background: rgba(255,255,255,0.1); border-color: var(--primario); }
+        .btn-registro-nav { background: var(--dorado); color: #000; border: none; font-weight: 900; }
+        .btn-registro-nav:hover { background: var(--dorado-hover); }
+
+        /* PASTILLA DE SESIÓN */
+        .user-logged-pastilla { display: none; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--primario) 0%, #990000 100%); padding: 8px 18px; border-radius: 50px; border: 1px solid var(--dorado); color: white; text-decoration: none; font-weight: 700; font-size: 0.8rem; cursor: pointer; box-shadow: 0 4px 12px rgba(255, 26, 26, 0.3); }
+        .user-logged-pastilla i { font-size: 0.75rem; color: var(--dorado); }
+
+        /* HERO */
+        .hero { padding: 30px 0 20px; text-align: center; }
+        .hero-banner { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+        .hero-logo-img { width: 120px; height: 120px; border-radius: 50%; margin-bottom: 15px; border: 2px solid var(--dorado); box-shadow: 0 0 25px rgba(255, 26, 26, 0.4); object-fit: cover; }
+        
+        .badge-estado { display: inline-flex; align-items: center; gap: 6px; background: rgba(0, 230, 118, 0.1); color: var(--exito); padding: 5px 12px; border-radius: 50px; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; margin-bottom: 20px; border: 1px solid rgba(0, 230, 118, 0.2); }
+        .badge-estado .punto { width: 6px; height: 6px; background-color: var(--exito); border-radius: 50%; }
+
+        .hero-titulo { font-size: 2.6rem; font-weight: 900; margin-bottom: 15px; text-transform: uppercase; letter-spacing: -0.5px; color: var(--texto-blanco); }
+        .hero-titulo span { display: block; color: var(--primario); font-size: 2.6rem; text-shadow: 0 0 15px rgba(255, 26, 26, 0.4); }
+        .hero-descripcion { font-size: 0.88rem; color: var(--texto-mutado); max-width: 620px; margin: 0 auto 25px; line-height: 1.5; }
+        
+        /* FORMULARIOS Y CAJA DE ÉXITO */
+        .seccion-formularios { display: none; width: 100%; max-width: 440px; margin: 0 auto 25px; }
+        .contenedor-form { background-color: var(--bg-tarjeta); border: 1.5px solid var(--borde); border-radius: 16px; padding: 25px; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        .form-titulo { font-size: 1.2rem; font-weight: 900; text-transform: uppercase; margin-bottom: 15px; }
+        .form-titulo span { color: var(--primario); }
+        .grupo-input { position: relative; margin-bottom: 12px; }
+        .grupo-input i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--texto-mutado); font-size: 0.9rem; }
+        .input-auth { width: 100%; padding: 12px 14px 12px 40px; background: #080304; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; color: #fff; font-family: var(--fuente); font-size: 0.88rem; outline: none; }
+        .input-auth:focus { border-color: var(--primario); }
+        .form-btn { width: 100%; margin-top: 5px; }
+
+        .caja-exito-final { display: none; background: rgba(20, 9, 12, 0.95); border: 2px solid var(--dorado); border-radius: 16px; padding: 35px 25px; width: 100%; max-width: 440px; margin: 0 auto 25px; box-shadow: 0 0 30px rgba(230, 184, 0, 0.2); }
+        .icono-exito { color: var(--exito); font-size: 2rem; margin-bottom: 15px; }
+        .titulo-exito { color: var(--exito); font-size: 1.15rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+
+        /* BOTONES DE REDES SOCIALES */
+        .hero-botones { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; width: 100%; margin-bottom: 35px; }
+        .hero-botones .btn { font-size: 0.72rem; padding: 10px 16px; border-radius: 6px; }
+
+        /* TARJETAS DE ESTADÍSTICAS */
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 900px; margin: 0 auto 50px; }
+        .stat-card { background-color: var(--bg-tarjeta); border: 1px solid var(--borde); border-radius: 12px; padding: 20px 10px; text-align: center; }
+        .stat-card i { font-size: 1.3rem; color: var(--dorado); margin-bottom: 8px; }
+        .stat-numero { font-size: 1.7rem; font-weight: 900; letter-spacing: -0.5px; line-height: 1.2; color: var(--texto-blanco); }
+        .stat-label { font-size: 0.62rem; font-weight: 700; color: var(--texto-mutado); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+
+        /* BUSCADOR */
+        .buscador-seccion { padding: 20px 0 40px; }
+        .buscador-titulo { font-size: 1.3rem; font-weight: 900; text-transform: uppercase; margin-bottom: 6px; text-align: center; }
+        .buscador-subtitulo { font-size: 0.78rem; color: var(--texto-mutado); text-align: center; margin-bottom: 25px; }
+        .buscador-contenedor { max-width: 640px; margin: 0 auto 25px; }
+        .buscador-input-wrapper { position: relative; display: flex; align-items: center; }
+        .buscador-input-wrapper i { position: absolute; left: 18px; color: var(--texto-mutado); font-size: 1rem; }
+        .buscador-control { width: 100%; padding: 14px 14px 14px 48px; background-color: var(--bg-tarjeta); border: 1px solid var(--borde); border-radius: 10px; color: #fff; font-family: var(--fuente); font-size: 0.85rem; outline: none; }
+        .buscador-control:focus { border-color: var(--dorado); }
+        
+        /* FILAS DE CANALES */
+        .lista-canales { display: grid; grid-template-columns: 1fr; gap: 10px; max-width: 640px; margin: 0 auto 40px; }
+        .canal-fila { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: rgba(20, 9, 12, 0.6); border: 1px solid rgba(255, 26, 26, 0.1); border-radius: 8px; }
+        .canal-info-basica { display: flex; align-items: center; gap: 12px; }
+        .canal-icon-box { color: var(--primario); font-size: 0.9rem; }
+        .canal-nombre-texto { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.3px; }
+        .canal-categoria-tag { font-size: 0.6rem; background: rgba(230, 184, 0, 0.15); color: var(--dorado); padding: 3px 8px; border-radius: 4px; font-weight: 700; text-transform: uppercase; border: 1px solid rgba(230, 184, 0, 0.3); }
+        .btn-unirse-mini { padding: 6px 14px; font-size: 0.65rem; border-radius: 4px; background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.2); text-decoration: none; font-weight: 700; text-transform: uppercase; transition: var(--transicion); }
+        .btn-unirse-mini:hover { background: var(--primario); border-color: var(--primario); color: #fff; }
+        .canal-fila:hover { border-color: var(--dorado); background: var(--bg-tarjeta-hover); }
+
+        /* RESPALDOS */
+        .respaldos { padding: 30px 0; }
+        .respaldos-lista { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 700px; margin: 0 auto; }
+        .respaldo-item { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; background-color: var(--bg-tarjeta); border-radius: 10px; border: 1px solid var(--borde); }
+        .respaldo-info { display: flex; align-items: center; gap: 12px; }
+        .respaldo-info i { font-size: 1.4rem; color: #0088cc; }
+        .respaldo-nombre { font-size: 0.78rem; font-weight: 700; }
+        .respaldo-status { font-size: 0.68rem; color: var(--texto-mutado); display: flex; align-items: center; gap: 5px; }
+        .respaldo-status .punto { width: 5px; height: 5px; background-color: #00e676; border-radius: 50%; display: inline-block; }
+        
+        footer { background-color: #040102; padding: 30px 0; text-align: center; border-top: 1px solid rgba(255, 26, 26, 0.1); margin-top: 40px; font-size: 0.75rem; color: var(--texto-mutado); }
+        .telegram-flotante { position: fixed; bottom: 20px; right: 20px; background: linear-gradient(135deg, var(--primario) 0%, #990000 100%); color: #fff; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; text-decoration: none; z-index: 999; box-shadow: 0 4px 15px rgba(255, 26, 26, 0.4); border: 1px solid var(--dorado); }
+
+        @media (max-width: 900px) {
+            .respaldos-lista { grid-template-columns: 1fr; max-width: 640px; }
+        }
+        @media (max-width: 600px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .hero-titulo, .hero-titulo span { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="contenedor">
+            <a href="#" class="brand">
+                <img src="no_bg_image.png" alt="Placer Ardiente Logo" class="brand-logo">
+                <div class="brand-nombre">PLACER <span>ARDIENTE</span></div>
+            </a>
+            
+            <div class="header-acciones" id="accionesInvitado">
+                <button onclick="alternarFormulario('login')" class="btn-acceso-nav btn-login-nav"><i class="fas fa-sign-in-alt"></i> Login</button>
+                <button onclick="alternarFormulario('registro')" class="btn-acceso-nav btn-registro-nav"><i class="fas fa-user-plus"></i> Registrarse</button>
+            </div>
+
+            <button class="user-logged-pastilla" id="pastillaSesion" onclick="cerrarSesion()">
+                <i class="fas fa-user"></i> <span id="pastillaNombre">@placeroculto21</span>
+            </button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="contenedor">
+            <div class="hero-banner">
+                <img src="no_bg_image.png" alt="Placer Ardiente Logo" class="hero-logo-img">
+                
+                <div class="badge-estado"><span class="punto"></span> Canales Oficiales Online</div>
+                
+                <h1 class="hero-titulo">PLACER <span>ARDIENTE</span></h1>
+                
+                <p class="hero-descripcion">¡Te damos la bienvenida a nuestra comunidad oficial! Acceso exclusivo, directo y sin interrupciones. Encuentra nuestros canales y plataformas verificadas al instante. 🔥👑</p>
+                
+                <div class="seccion-formularios" id="zonaFormularios">
+                    <div class="contenedor-form" id="cajaLogin" style="display: none;">
+                        <h3 class="form-titulo">Iniciar <span>Sesión</span></h3>
+                        <form onsubmit="ejecutarAccion(event, 'login')">
+                            <div class="grupo-input">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="loginUser" class="input-auth" placeholder="Tu Usuario / Apodo" required>
+                            </div>
+                            <div class="grupo-input">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" class="input-auth" placeholder="Contraseña" required>
+                            </div>
+                            <button type="submit" class="btn btn-primario form-btn">Entrar al Portal</button>
+                        </form>
+                    </div>
+
+                    <div class="contenedor-form" id="cajaRegistro" style="display: none;">
+                        <h3 class="form-titulo">Crear <span>Cuenta</span></h3>
+                        <form onsubmit="ejecutarAccion(event, 'registro')">
+                            <div class="grupo-input">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="regUser" class="input-auth" placeholder="Elige tu Apodo" required>
+                            </div>
+                            <div class="grupo-input">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" class="input-auth" placeholder="Contraseña" required>
+                            </div>
+                            <button type="submit" class="btn btn-primario form-btn">Completar Registro</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="caja-exito-final" id="pantallaExito">
+                    <div class="icono-exito"><i class="fas fa-check-circle"></i></div>
+                    <div class="titulo-exito">¡ACCESO CONCEDIDO!</div>
+                    <p style="color: var(--texto-mutado); font-size: 0.78rem; margin-bottom: 18px;">Has ingresado correctamente como <br><strong id="nombreUsuarioCreado" style="color:#fff;">@placeroculto21</strong>.</p>
+                    <button onclick="confirmarIngresoFinal()" class="btn btn-dorado" style="width:100%; font-size:0.7rem; padding:12px;">ACCEDER A CANALES VIP</button>
+                </div>
+
+                <div class="hero-botones">
+                    <a href="https://t.me/PLACERARDIENTE" target="_blank" class="btn btn-primario">
+                        <i class="fab fa-telegram-plane"></i> CANAL OFICIAL TELEGRAM
+                    </a>
+                    
+                    <a href="https://www.instagram.com/placerardiente?stkn=eHN0M3hxbzZpeHJz" target="_blank" class="btn btn-outline" style="border-color: #e1306c;">
+                        <i class="fab fa-instagram" style="color: #e1306c;"></i> Instagram
+                    </a>
+
+                    <a href="https://t.me/PLACEROCULTO21" target="_blank" class="btn btn-dorado">
+                        <i class="fas fa-paper-plane"></i> CONTACTO / SUGERENCIAS
+                    </a>
+
+                    <a href="#buscador" class="btn btn-outline">
+                        <i class="fas fa-search"></i> Buscar Canales
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contenedor">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fas fa-fire"></i>
+                <div class="stat-numero">50,000+</div>
+                <div class="stat-label">Conectados Ahora</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-crown"></i>
+                <div class="stat-numero" id="numMiembros">3,850</div>
+                <div class="stat-label">Miembros Oficiales</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-shield-alt"></i>
+                <div class="stat-numero">100%</div>
+                <div class="stat-label">Verificado</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="buscador-seccion" id="buscador">
+        <div class="contenedor">
+            <h2 class="buscador-titulo">Directorio Oficial de Canales</h2>
+            <p class="buscador-subtitulo">Busca o navega entre nuestras opciones verificadas para acceder de forma directa.</p>
+            
+            <div class="buscador-contenedor">
+                <div class="buscador-input-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="inputBuscar" class="buscador-control" placeholder="Buscar canal o servicio..." oninput="filtrarCanales()">
+                </div>
+            </div>
+
+            <div class="lista-canales" id="listaCanales">
+                <div class="canal-fila">
+                    <div class="canal-info-basica">
+                        <div class="canal-icon-box"><i class="fab fa-telegram-plane"></i></div>
+                        <div><span class="canal-nombre-texto">PLACER ARDIENTE - CANAL OFICIAL</span></div>
+                    </div>
+                    <span class="canal-categoria-tag">OFICIAL</span>
+                    <a href="https://t.me/PLACERARDIENTE" target="_blank" class="btn-unirse-mini">Unirse</a>
+                </div>
+
+                <div class="canal-fila">
+                    <div class="canal-info-basica">
+                        <div class="canal-icon-box"><i class="fab fa-instagram"></i></div>
+                        <div><span class="canal-nombre-texto">INSTAGRAM OFICIAL</span></div>
+                    </div>
+                    <span class="canal-categoria-tag">INSTAGRAM</span>
+                    <a href="https://www.instagram.com/placerardiente?stkn=eHN0M3hxbzZpeHJz" target="_blank" class="btn-unirse-mini">Seguir</a>
+                </div>
+
+                <div class="canal-fila">
+                    <div class="canal-info-basica">
+                        <div class="canal-icon-box"><i class="fas fa-comment-dots"></i></div>
+                        <div><span class="canal-nombre-texto">CONTACTO & SUGERENCIAS (@PLACEROCULTO21)</span></div>
+                    </div>
+                    <span class="canal-categoria-tag">SOPORTE</span>
+                    <a href="https://t.me/PLACEROCULTO21" target="_blank" class="btn-unirse-mini">Contactar</a>
+                </div>
+
+                <div class="canal-fila">
+                    <div class="canal-info-basica">
+                        <div class="canal-icon-box"><i class="fas fa-ad"></i></div>
+                        <div><span class="canal-nombre-texto">ESPACIO PUBLICITARIO DISPONIBLE</span></div>
+                    </div>
+                    <span class="canal-categoria-tag" style="background: rgba(39, 174, 96, 0.2); color: #27ae60; border-color: #27ae60;">ANUNCIAR</span>
+                    <a href="https://t.me/PLACEROCULTO21" target="_blank" class="btn-unirse-mini">Comprar</a>
+                </div>
+                
+                <div class="canal-fila">
+                    <div class="canal-info-basica">
+                        <div class="canal-icon-box"><i class="fas fa-ad"></i></div>
+                        <div><span class="canal-nombre-texto">ESPACIO PUBLICITARIO DISPONIBLE</span></div>
+                    </div>
+                    <span class="canal-categoria-tag" style="background: rgba(39, 174, 96, 0.2); color: #27ae60; border-color: #27ae60;">ANUNCIAR</span>
+                    <a href="https://t.me/PLACEROCULTO21" target="_blank" class="btn-unirse-mini">Comprar</a>
+                </div>
+            </div>
+
+            <section class="respaldos">
+                <div style="text-align: center; margin-bottom: 35px;">
+                    <h3 style="font-size: 1.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px;">Acceso <span>Directo</span></h3>
+                    <p style="color: var(--texto-mutado); font-size: 0.9rem;">Enlaces directos para comunicación y atenciones generales.</p>
+                </div>
+                
+                <div class="respaldos-lista">
+                    <div class="respaldo-item">
+                        <div class="respaldo-info">
+                            <i class="fab fa-telegram" style="color: #0088cc;"></i>
+                            <div>
+                                <div class="respaldo-nombre">CANAL PRINCIPAL</div>
+                                <div class="respaldo-status"><span class="punto"></span> Activo</div>
+                            </div>
+                        </div>
+                        <a href="https://t.me/PLACERARDIENTE" target="_blank" class="btn btn-secundario" style="font-size:0.65rem; padding:6px 14px;">UNIRTE</a>
+                    </div>
+
+                    <div class="respaldo-item" style="border-color: var(--borde);">
+                        <div class="respaldo-info">
+                            <i class="fas fa-user-shield" style="color: var(--dorado);"></i>
+                            <div>
+                                <div class="respaldo-nombre">ADMINISTRACIÓN</div>
+                                <div class="respaldo-status" style="color: var(--dorado);"><span class="punto" style="background-color: var(--dorado);"></span> Soporte Directo</div>
+                            </div>
+                        </div>
+                        <a href="https://t.me/PLACEROCULTO21" target="_blank" class="btn btn-dorado" style="font-size:0.65rem; padding:6px 14px;">ENVIAR MSG</a>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </section>
+
+    <footer>
+        <div>
+            <img src="no_bg_image.png" alt="PLACER ARDIENTE LOGO" class="brand-logo" style="margin-bottom: 15px; width: 65px; height: 65px;">
+        </div>
+        <p>&copy; 2026 <span class="footer-brand" style="color: var(--primario); font-weight: 700;">PLACER ARDIENTE</span>. Todos los derechos reservados.</p>
+        <p style="font-size: 14px; color: #888; margin-top: 5px;">Contacto oficial: @PLACEROCULTO21</p>
+        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.2); margin-top: 10px;">Accede siempre a través de nuestros canales y dominios autorizados.</p>
+    </footer>
+
+    <a href="https://t.me/PLACERARDIENTE" target="_blank" class="telegram-flotante"><i class="fab fa-telegram-plane"></i></a>
+
+    <script>
+        let usuarioActual = "";
+
+        function alternarFormulario(tipo) {
+            const zona = document.getElementById('zonaFormularios');
+            const cajaLogin = document.getElementById('cajaLogin');
+            const cajaRegistro = document.getElementById('cajaRegistro');
+            document.getElementById('pantallaExito').style.display = 'none';
+
+            if (tipo === 'login') {
+                zona.style.display = 'block';
+                cajaLogin.style.display = 'block';
+                cajaRegistro.style.display = 'none';
+            } else {
+                zona.style.display = 'block';
+                cajaRegistro.style.display = 'block';
+                cajaLogin.style.display = 'none';
+            }
+            zona.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function ejecutarAccion(event, tipo) {
+            event.preventDefault();
+            const apodo = tipo === 'login' ? document.getElementById('loginUser').value : document.getElementById('regUser').value;
+            usuarioActual = apodo.startsWith('@') ? apodo : '@' + apodo;
+
+            document.getElementById('zonaFormularios').style.display = 'none';
+            document.getElementById('nombreUsuarioCreado').innerText = usuarioActual;
+            document.getElementById('pantallaExito').style.display = 'block';
+        }
+
+        function confirmarIngresoFinal() {
+            document.getElementById('pantallaExito').style.display = 'none';
+            document.getElementById('accionesInvitado').style.display = 'none';
+            
+            const pastilla = document.getElementById('pastillaSesion');
+            pastilla.style.display = 'flex';
+            document.getElementById('pastillaNombre').innerText = usuarioActual;
+
+            document.getElementById('numMiembros').innerText = "3,851";
+        }
+
+        function cerrarSesion() {
+            document.getElementById('pastillaSesion').style.display = 'none';
+            document.getElementById('accionesInvitado').style.display = 'flex';
+            document.getElementById('numMiembros').innerText = "3,850";
+            usuarioActual = "";
+        }
+
+        function filtrarCanales() {
+            const query = document.getElementById('inputBuscar').value.toLowerCase();
+            const filas = document.querySelectorAll('#listaCanales .canal-fila');
+            filas.forEach(fila => {
+                const texto = fila.querySelector('.canal-nombre-texto').innerText.toLowerCase();
+                fila.style.display = texto.includes(query) ? 'flex' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>
