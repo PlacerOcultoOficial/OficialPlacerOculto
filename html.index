@@ -204,3 +204,219 @@
                                 <input type="password" class="input-auth" placeholder="Contraseña" required>
                             </div>
                             <button type="submit" class="btn btn-primario form-btn">Completar Registro</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="caja-exito-final" id="pantallaExito">
+                    <div class="icono-exito"><i class="fas fa-check-circle"></i></div>
+                    <div class="titulo-exito">¡ACCESO CONCEDIDO!</div>
+                    <p style="color: var(--texto-mutado); font-size: 0.78rem; margin-bottom: 18px;">Has ingresado correctamente como <br><strong id="nombreUsuarioCreado" style="color:#fff;">@placeroculto21</strong>.</p>
+                    <button onclick="confirmarIngresoFinal()" class="btn btn-dorado" style="width:100%; font-size:0.7rem; padding:12px;">ACCEDER A CANALES VIP</button>
+                </div>
+
+                <div class="hero-botones">
+                    <a href="https://t.me/PLACERARDIENTE" target="_blank" class="btn btn-primario">
+                        <i class="fab fa-telegram-plane"></i> CANAL OFICIAL TELEGRAM
+                    </a>
+                    
+                    <a href="https://www.instagram.com/placerardiente?stkn=eHN0M3hxbzZpeHJz" target="_blank" class="btn btn-outline" style="border-color: #e1306c;">
+                        <i class="fab fa-instagram" style="color: #e1306c;"></i> Instagram
+                    </a>
+
+                    <a href="https://t.me/PLACEROCULTO21" target="_blank" class="btn btn-dorado">
+                        <i class="fas fa-paper-plane"></i> CONTACTO / SUGERENCIAS
+                    </a>
+
+                    <a href="#buscador" class="btn btn-outline">
+                        <i class="fas fa-search"></i> Buscar Canales
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contenedor">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fas fa-fire"></i>
+                <div class="stat-numero">50,000+</div>
+                <div class="stat-label">Conectados Ahora</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-crown"></i>
+                <div class="stat-numero" id="numMiembros">3,850</div>
+                <div class="stat-label">Miembros Oficiales</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-shield-alt"></i>
+                <div class="stat-numero">100%</div>
+                <div class="stat-label">Verificado</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="buscador-seccion" id="buscador">
+        <div class="contenedor">
+            <h2 class="buscador-titulo">Directorio Oficial de Canales</h2>
+            <p class="buscador-subtitulo">Busca o navega entre nuestras opciones verificadas para acceder de forma directa.</p>
+            
+            <div class="buscador-contenedor">
+                <div class="buscador-input-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="inputBuscar" class="buscador-control" placeholder="Buscar canal o servicio..." oninput="filtrarCanales()">
+                </div>
+            </div>
+
+            <div class="lista-canales" id="listaCanales">
+                <div class="canal-fila">
+                    <div class="canal-info-basica">
+                        <div class="canal-icon-box"><i class="fab fa-telegram-plane"></i></div>
+                        <div><span class="canal-nombre-texto">PLACER ARDIENTE - CANAL OFICIAL</span></div>
+                    </div>
+                    <span class="canal-categoria-tag">OFICIAL</span>
+                    <a href="https://t.me/PLACERARDIENTE" target="_blank" class="btn-unirse-mini">Unirse</a>
+                </div>
+
+                <div class="canal-fila">
+                    <div class="canal-info-basica">
+                        <div class="canal-icon-box"><i class="fab fa-instagram"></i></div>
+                        <div><span class="canal-nombre-texto">INSTAGRAM OFICIAL</span></div>
+                    </div>
+                    <span class="canal-categoria-tag">INSTAGRAM</span>
+                    <a href="https://www.instagram.com/placerardiente?stkn=eHN0M3hxbzZpeHJz" target="_blank" class="btn-unirse-mini">Seguir</a>
+                </div>
+
+                <div class="canal-fila">
+                    <div class="canal-info-basica">
+                        <div class="canal-icon-box"><i class="fas fa-comment-dots"></i></div>
+                        <div><span class="canal-nombre-texto">CONTACTO & SUGERENCIAS (@PLACEROCULTO21)</span></div>
+                    </div>
+                    <span class="canal-categoria-tag">SOPORTE</span>
+                    <a href="https://t.me/PLACEROCULTO21" target="_blank" class="btn-unirse-mini">Contactar</a>
+                </div>
+
+                <div class="canal-fila">
+                    <div class="canal-info-basica">
+                        <div class="canal-icon-box"><i class="fas fa-ad"></i></div>
+                        <div><span class="canal-nombre-texto">ESPACIO PUBLICITARIO DISPONIBLE</span></div>
+                    </div>
+                    <span class="canal-categoria-tag" style="background: rgba(39, 174, 96, 0.2); color: #27ae60; border-color: #27ae60;">ANUNCIAR</span>
+                    <a href="https://t.me/PLACEROCULTO21" target="_blank" class="btn-unirse-mini">Comprar</a>
+                </div>
+                
+                <div class="canal-fila">
+                    <div class="canal-info-basica">
+                        <div class="canal-icon-box"><i class="fas fa-ad"></i></div>
+                        <div><span class="canal-nombre-texto">ESPACIO PUBLICITARIO DISPONIBLE</span></div>
+                    </div>
+                    <span class="canal-categoria-tag" style="background: rgba(39, 174, 96, 0.2); color: #27ae60; border-color: #27ae60;">ANUNCIAR</span>
+                    <a href="https://t.me/PLACEROCULTO21" target="_blank" class="btn-unirse-mini">Comprar</a>
+                </div>
+            </div>
+
+            <section class="respaldos">
+                <div style="text-align: center; margin-bottom: 35px;">
+                    <h3 style="font-size: 1.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px;">Acceso <span>Directo</span></h3>
+                    <p style="color: var(--texto-mutado); font-size: 0.9rem;">Enlaces directos para comunicación y atenciones generales.</p>
+                </div>
+                
+                <div class="respaldos-lista">
+                    <div class="respaldo-item">
+                        <div class="respaldo-info">
+                            <i class="fab fa-telegram" style="color: #0088cc;"></i>
+                            <div>
+                                <div class="respaldo-nombre">CANAL PRINCIPAL</div>
+                                <div class="respaldo-status"><span class="punto"></span> Activo</div>
+                            </div>
+                        </div>
+                        <a href="https://t.me/PLACERARDIENTE" target="_blank" class="btn btn-secundario" style="font-size:0.65rem; padding:6px 14px;">UNIRTE</a>
+                    </div>
+
+                    <div class="respaldo-item" style="border-color: var(--borde);">
+                        <div class="respaldo-info">
+                            <i class="fas fa-user-shield" style="color: var(--dorado);"></i>
+                            <div>
+                                <div class="respaldo-nombre">ADMINISTRACIÓN</div>
+                                <div class="respaldo-status" style="color: var(--dorado);"><span class="punto" style="background-color: var(--dorado);"></span> Soporte Directo</div>
+                            </div>
+                        </div>
+                        <a href="https://t.me/PLACEROCULTO21" target="_blank" class="btn btn-dorado" style="font-size:0.65rem; padding:6px 14px;">ENVIAR MSG</a>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </section>
+
+    <footer>
+        <div>
+            <img src="no_bg_image.png" alt="PLACER ARDIENTE LOGO" class="brand-logo" style="margin-bottom: 15px; width: 65px; height: 65px;">
+        </div>
+        <p>&copy; 2026 <span class="footer-brand" style="color: var(--primario); font-weight: 700;">PLACER ARDIENTE</span>. Todos los derechos reservados.</p>
+        <p style="font-size: 14px; color: #888; margin-top: 5px;">Contacto oficial: @PLACEROCULTO21</p>
+        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.2); margin-top: 10px;">Accede siempre a través de nuestros canales y dominios autorizados.</p>
+    </footer>
+
+    <a href="https://t.me/PLACERARDIENTE" target="_blank" class="telegram-flotante"><i class="fab fa-telegram-plane"></i></a>
+
+    <script>
+        let usuarioActual = "";
+
+        function alternarFormulario(tipo) {
+            const zona = document.getElementById('zonaFormularios');
+            const cajaLogin = document.getElementById('cajaLogin');
+            const cajaRegistro = document.getElementById('cajaRegistro');
+            document.getElementById('pantallaExito').style.display = 'none';
+
+            if (tipo === 'login') {
+                zona.style.display = 'block';
+                cajaLogin.style.display = 'block';
+                cajaRegistro.style.display = 'none';
+            } else {
+                zona.style.display = 'block';
+                cajaRegistro.style.display = 'block';
+                cajaLogin.style.display = 'none';
+            }
+            zona.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function ejecutarAccion(event, tipo) {
+            event.preventDefault();
+            const apodo = tipo === 'login' ? document.getElementById('loginUser').value : document.getElementById('regUser').value;
+            usuarioActual = apodo.startsWith('@') ? apodo : '@' + apodo;
+
+            document.getElementById('zonaFormularios').style.display = 'none';
+            document.getElementById('nombreUsuarioCreado').innerText = usuarioActual;
+            document.getElementById('pantallaExito').style.display = 'block';
+        }
+
+        function confirmarIngresoFinal() {
+            document.getElementById('pantallaExito').style.display = 'none';
+            document.getElementById('accionesInvitado').style.display = 'none';
+            
+            const pastilla = document.getElementById('pastillaSesion');
+            pastilla.style.display = 'flex';
+            document.getElementById('pastillaNombre').innerText = usuarioActual;
+
+            document.getElementById('numMiembros').innerText = "3,851";
+        }
+
+        function cerrarSesion() {
+            document.getElementById('pastillaSesion').style.display = 'none';
+            document.getElementById('accionesInvitado').style.display = 'flex';
+            document.getElementById('numMiembros').innerText = "3,850";
+            usuarioActual = "";
+        }
+
+        function filtrarCanales() {
+            const query = document.getElementById('inputBuscar').value.toLowerCase();
+            const filas = document.querySelectorAll('#listaCanales .canal-fila');
+            filas.forEach(fila => {
+                const texto = fila.querySelector('.canal-nombre-texto').innerText.toLowerCase();
+                fila.style.display = texto.includes(query) ? 'flex' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>
